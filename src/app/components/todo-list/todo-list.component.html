@@ -1,0 +1,76 @@
+<div class="container mt-4">
+    <!-- Search Section -->
+    <div class="mb-3">
+        <div class="input-group">
+            <input [(ngModel)]="searchQuery" placeholder="Search by title" class="form-control" (input)="search()" />
+            <button (click)="search()" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <select [(ngModel)]="selectedCategory" (change)="filterByCategory()" class="form-select">
+                <option value="">All Categories</option>
+                <option value="Work">Work</option>
+                <option value="General">General</option>
+                <option value="Personal Development">Personal Development</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <input type="date" [(ngModel)]="startDate" placeholder="Start Date" class="form-control" />
+
+        </div>
+        <div class="col-md-4">
+            <input type="date" [(ngModel)]="endDate" placeholder="End Date" class="form-control" />
+        </div>
+
+    </div>
+
+    <div class="mb-3 row">
+        <div class="col-md-4">
+
+            <button (click)="filterByDateRange()" class="btn btn-secondary">
+                Filter by Date
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button (click)="clearFilters()" class="btn btn-warning">
+                Clear Filters
+            </button>
+        </div>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Category</th>
+                <th>Depends On</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todo of todos">
+                <td>{{ todo.id }}</td>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.startDate }}</td>
+                <td>{{ todo.endDate }}</td>
+                <td>{{ todo.category }}</td>
+                <td>{{ todo.dependsOn || 'None' }}</td>
+                <td>
+                    <button (click)="edit(todo)" class="btn btn-sm btn-warning me-2">
+                        Edit
+                    </button>
+
+                    <button (click)="deleteTodo(todo.id)" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
